@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>電卓アプリ</title>
+
+    <!--ページ一覧の背景色 -->
+    <style>
+        .container {
+            display: flex;
+        }
+        .menu {
+            width: 200px;
+            padding: 10px;
+            background-color: #f0f0f0;
+        }
+        .main {
+            flex: 2;
+            padding: 20px;
+        }
+    </style>
+</head>
+    <div class="container">
+        <div class="menu">
+            <ul>
+                <li><a href="{{url_for('page2')}}">ページ2</a></li>
+                <li><a href="{{url_for('page3')}}">ページ3</a></li>
+            </ul>
+        </div>
+        <div class="main">
+            <!-- 元の index.html の内容ここに -->
+
+
+    <h1>Web電卓</h1>
+
+    <!-- 計算フォーム -->
+    <form method="post">
+        <input type="text" name="expression" placeholder="例: 1+2*3" required oninput="convertToHalfWidth(this)">
+        <div class="note">
+            ※数字（0～9）や計算記号（+、-、*、/、%）のみ入力してください。
+        </div>
+        <input type="submit" value="計算">
+    </form>
+
+    <!-- 計算結果の表示 -->
+    {% if result %}
+        <div class="result">結果: {{ result }}</div>
+    {% endif %}
+
+    <!-- 計算履歴 -->
+    {% if history %}
+    <div class="history">
+        <h3>計算履歴</h3>
+        <ul>
+            {% for item in history %}
+            <li>
+                {{ item.expression }}
+                <!-- 削除フォーム -->
+                <form method="post" action="/delete_one/{{ loop.index0 }}" class= "inline-form" style="display:inline;"> <!--style***を消したら計算結果・削除ボタン・メモ・メモ保存ボタンが真ん中に1業ずつ表示になる -->
+                    <input type="hidden" name="index" value="{{ loop.index0 }}">
+                    <button type="submit">削除</button>
+                </form>
+
+                <!-- メモ入力フォーム -->
+                <form method="post" action="/memo" style="display:inline;">
+                    <input type="hidden" name="index" value="{{ loop.index0 }}">
+                    <input type="text" name="memo_value" value="{{ item.memo }}" placeholder="メモを入力">
+                    <button type="submit">メモ保存</button>
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <!-- 履歴クリアボタン -->
+    <form method="post" action="/delete">
+        <button type="submit" style="margin-top: 20px">履歴クリア</button>
+    </form>
+
+
+
+
+        </div>
+    </div>
+
+</html>
+
+
+
+
+
+

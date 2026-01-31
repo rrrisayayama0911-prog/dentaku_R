@@ -1,0 +1,115 @@
+/* -------------------------
+   ベーススタイル
+-------------------------- */
+
+
+
+.container {
+        display: flex; /* 横並びにする */
+        min-height: 100vh; /* 画面の高さに合わせる */
+    }
+
+.main-content {
+    flex:1; /* 残りの幅を全部使う */
+    background-image: url("/static/images/DSC_0022.JPG");
+    background-size: right;
+    background-position: right;
+    background-repeat:no-repeat;
+    padding:20px;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 50px;
+}
+
+/* 背景画像（白っぽさ除去） */
+body::before {
+    content: "";
+    position: left;
+    top: 0;
+    left: 0;
+    width: 80%;
+    height: 100%;
+    background-image: url("/static/images/DSC_0022.JPG");
+    background-position:top right ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: transparent; /*背景を透明にする*/
+    opacity: 0.3;
+    z-index: -1;
+}
+
+/* 数式入力欄 */
+input[type="text"] {
+    width: 300px;
+    font-size: 20px;
+    padding: 10px;
+}
+
+/* 計算ボタン（ピンクのまま） */
+input[type="submit"] {
+    font-size: 20px;
+    padding: 10px 20px;
+    color: black;
+    background-color: pink;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+}
+
+/* 削除・履歴クリア・メモ保存・Next・Back（グレーボタン） */
+button {
+    font-size: 16px;
+    padding: 6px 14px;
+    margin-left: 5px;
+    color: black;
+    background-color: #f0f0f0;
+    border: 1px solid #999;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* 小さな注釈 */
+.note {
+    font-size: 12px;
+    color: gray;
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+
+/* 結果表示 */
+.result {
+    margin-top: 20px;
+    font-size: 24px;
+    color: black;
+}
+
+/* 計算履歴 */
+.history {
+    margin-top: 30px;
+}
+
+.history ul {
+    padding: 0;
+    list-style: none;
+}
+
+.history li {
+    margin: 8px 0;
+}
+
+.history-item {
+    margin: 8px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.history-item .expression {
+    margin-right: 10px;
+    font-weight: bold;
+}
